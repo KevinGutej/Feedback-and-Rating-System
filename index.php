@@ -88,7 +88,20 @@
                 <input type="submit" value="Submit Feedback">
             </form>
         </div>
+        <div class="feedback-display">
+        <h3>Recent Feedback:</h3> //CREATE A DATABASE
+        <?php
+        $query = "SELECT * FROM feedback ORDER BY id DESC LIMIT 5";
+        $result = mysqli_query($conn, $query);
 
+        while ($row = mysqli_fetch_assoc($result)) {
+            echo "<p>Rating: {$row['rating']} / 5<br>";
+            echo "Feedback: {$row['feedback']}</p>";
+        }
+        mysqli_close($conn);
+        ?>
+        </div>
+    </div>
 </body>
 
 </html>
