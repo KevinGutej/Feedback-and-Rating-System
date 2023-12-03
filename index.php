@@ -5,10 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Feedback and Rating System</title>
-</head>
-
-<body>
-<style>
+    <style>
         body {
             font-family: 'Arial', sans-serif;
             background-color: #f4f4f4;
@@ -25,7 +22,8 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
-        h2, h3 {
+        h2,
+        h3 {
             text-align: center;
             color: #333;
         }
@@ -68,7 +66,9 @@
             box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
         }
     </style>
+</head>
 
+<body>
     <div class="feedback-container">
         <h2>Kevin's Feedback and Rating System</h2>
         <div class="feedback-form">
@@ -89,17 +89,24 @@
             </form>
         </div>
         <div class="feedback-display">
-        <h3>Recent Feedback:</h3> //CREATE A DATABASE
-        <?php
-        $query = "SELECT * FROM feedback ORDER BY id DESC LIMIT 5";
-        $result = mysqli_query($conn, $query);
+            <h3>Recent Feedback:</h3>
+            <?php
+            $conn = mysqli_connect("", "", "", ""); // CREATE DATABASE AND FILL THIS OUT
 
-        while ($row = mysqli_fetch_assoc($result)) {
-            echo "<p>Rating: {$row['rating']} / 5<br>";
-            echo "Feedback: {$row['feedback']}</p>";
-        }
-        mysqli_close($conn);
-        ?>
+            if (!$conn) {
+                die("Connection failed: " . mysqli_connect_error());
+            }
+
+            $query = "SELECT * FROM feedback ORDER BY id DESC LIMIT 5";
+            $result = mysqli_query($conn, $query);
+
+            while ($row = mysqli_fetch_assoc($result)) {
+                echo "<p>Rating: {$row['rating']} / 5<br>";
+                echo "Feedback: {$row['feedback']}</p>";
+            }
+
+            mysqli_close($conn);
+            ?>
         </div>
     </div>
 </body>
